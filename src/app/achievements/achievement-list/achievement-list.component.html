@@ -1,0 +1,5 @@
+<mat-selection-list (selectionChange)="toggleSelection($event)">
+  <mat-list-option *ngFor="let achievement of achievements" [value]="achievement" [selected]="achievement.completed">
+    {{ achievement.name }}
+  </mat-list-option>
+</mat-selection-list>

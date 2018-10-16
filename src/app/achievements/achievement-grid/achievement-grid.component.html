@@ -1,0 +1,61 @@
+<h2>{{ category?.name || 'All' }}</h2>
+
+<div class="card-header">
+  <mat-checkbox (click)="$event.stopPropagation()" (change)="toggleHideCompleted($event)">
+    Hide completed
+  </mat-checkbox>
+  <span class="flex-fill"></span>
+  <p *ngIf="dataSource.stats$ | async as stats">
+    <ng-container *ngIf="type == 'rs'"><b>RuneScore:</b> {{ stats.completedRuneScore }} / {{ stats.totalRuneScore }}<br></ng-container>
+    <b>Completed:</b> {{ stats.completed }} / {{ stats.total }}
+  </p>
+</div>
+
+<mat-table [dataSource]="dataSource" [trackBy]="trackByUid" class="mat-elevation-z1">
+  <ng-container matColumnDef="completed">
+    <mat-header-cell *matHeaderCellDef>&nbsp;</mat-header-cell>
+    <mat-cell *matCellDef="let achievement">
+      <mat-checkbox (click)="$event.stopPropagation()"
+                    (change)="$event ? toggleAchievementTable(achievement) : null"
+                    [checked]="achievement.completed"
+                    [disabled]="toggling">
+      </mat-checkbox>
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="runescore">
+    <mat-header-cell *matHeaderCellDef>RS</mat-header-cell>
+    <mat-cell *matCellDef="let achievement" class="mat-body-2">{{ achievement.runescore }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+    <mat-cell *matCellDef="let achievement">
+      <div>
+        <button mat-icon-button class="expand" *ngIf="achievement.achievements" (click)="toggleExpand(achievement)">
+          <mat-icon>{{ isExpanded(achievement) ? 'expand_less' : 'expand_more' }}</mat-icon>
+        </button>
+
+        <!-- <a href=""><img src="/assets/images/achievement-help-16.png" alt="Achievement Help" title="Achievement Help" width="16" height="16"></a> -->
+        <ng-container *ngIf="!achievement.wiki">{{ achievement.name }}</ng-container>
+        <a *ngIf="achievement.wiki" href="{{ achievement.wiki }}" target="_blank">
+          <img src="/assets/images/rswiki.ico" alt="RuneScape Wiki" title="RuneScape Wiki" width="16" height="16">
+          {{ achievement.name }}
+        </a>
+        <p class="mat-caption">{{ achievement.description }}</p>
+        <achievement-list *ngIf="achievement.achievements && isExpanded(achievement)" [achievements]="achievement.achievements$ | async"></achievement-list>
+        <!-- <achievement-grid *ngIf="achievement.achievements" [achievements]="achievement.achievements$ | async"></achievement-grid> -->
+      </div>
+    </mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+
+<mat-paginator
+  class="mat-elevation-z1"
+  [length]="(dataSource.stats$ | async).filteredTotal"
+  [pageSize]="200"
+  [pageSizeOptions]="[25, 50, 100, 200]"
+  (page)="changePage($event)"
+></mat-paginator>
+
+<mat-spinner *ngIf="dataSource.loading$ | async"></mat-spinner>

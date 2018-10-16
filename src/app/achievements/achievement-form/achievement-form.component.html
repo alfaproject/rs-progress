@@ -1,0 +1,74 @@
+<form *ngIf="group" [formGroup]="group" (ngSubmit)="submit()">
+  <mat-form-field>
+    <input matInput formControlName="wiki" placeholder="Wiki URL" type="url" (keyup)="generateName()" #wiki>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput formControlName="name" placeholder="Name" (keyup)="generateSlug()">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput formControlName="slug" placeholder="Slug">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput formControlName="description" placeholder="Description">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput formControlName="runescore" placeholder="RuneScore" type="number" min="0">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select formControlName="type" placeholder="Type">
+      <mat-option value="rs">RuneScore</mat-option>
+      <mat-option value="tt">True Trim</mat-option>
+      <mat-option value="sa">Sub Achievement</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-chip-list #chipList>
+      <mat-chip
+        *ngFor="let subAchievement of subAchievements"
+        [selectable]="true"
+        [removable]="true"
+        (removed)="remove(subAchievement)">
+        {{ subAchievement.name }}
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+      <input
+        placeholder="Add achievement..."
+        #achievementsInput
+        formControlName="achievements"
+        [matAutocomplete]="auto"
+        [matChipInputFor]="chipList"
+        [matChipInputSeparatorKeyCodes]="[]"
+        [matChipInputAddOnBlur]="false"
+      >
+    </mat-chip-list>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+      <mat-option *ngFor="let achievement of filteredAchievements$ | async" [value]="achievement">
+        {{ achievement.name }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select formControlName="category" placeholder="Parent category">
+      <mat-option *ngFor="let category of categories$ | async" [value]="category">
+        {{ category.id }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select formControlName="achievement" placeholder="Parent achievement">
+      <mat-option *ngFor="let achievement of achievements$ | async" [value]="achievement">
+        {{ achievement.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="!group.valid">Submit</button>
+</form>

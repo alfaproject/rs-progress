@@ -1,0 +1,22 @@
+<form [formGroup]="userForm" (ngSubmit)="submitForm()">
+  <mat-form-field>
+    <input matInput formControlName="email" placeholder="Email" type="email">
+    <mat-error *ngIf="formErrors.email">
+      {{ formErrors.email }}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput formControlName="password" placeholder="Password" type="password">
+    <mat-error *ngIf="formErrors.password">
+      {{ formErrors.password }}
+    </mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" [disabled]="!userForm.valid">{{ ctaLabel }}</button>
+
+  <!-- <ng-container *ngIf="!newUser">
+    <a *ngIf="!passReset && userForm.controls.email.valid" class="help is-info" (click)="resetPassword()">Reset Password for {{userForm.value.email}}?</a>
+    <p *ngIf="passReset" class="help is-info">Reset requested. Check your email instructions.</p>
+  </ng-container> -->
+</form>

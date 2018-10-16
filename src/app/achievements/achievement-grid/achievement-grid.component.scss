@@ -1,0 +1,36 @@
+p {
+  margin: 0;
+}
+
+.expand {
+  float: right;
+}
+
+.mat-column-completed {
+  flex: 0 0 20px;
+  padding-right: 12px;
+}
+
+.mat-column-runescore {
+  flex: 0 0 34px;
+  justify-content: center;
+}
+
+.mat-column-name {
+  padding-left: 12px;
+  line-height: 16px;
+
+  > div {
+    width: 100%;
+  }
+
+  img {
+    vertical-align: text-bottom;
+    margin-right: 4px;
+  }
+}
+
+.card-header {
+  display: flex;
+  padding: 16px 4px;
+}

@@ -1,0 +1,23 @@
+<mat-toolbar>
+  <button type="button" mat-icon-button (click)="sidenav.toggle()" *ngIf="sidenav.exists() && (platform.isNarrowScreen$ | async)">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <a routerLink="/">RS Progress</a>
+  <span class="flex-fill"></span>
+  <a mat-button color="primary" routerLink="/achievements">Achievements</a>
+  <a mat-button color="primary" routerLink="/true-trim">True Trim</a>
+
+  <button mat-raised-button color="primary" *ngIf="auth.user | async as user; else logoutButton" [matMenuTriggerFor]="userMenu">
+    <img [src]="user.photoURL" width="24" height="24">
+  </button>
+  <mat-menu #userMenu="matMenu">
+    <a mat-menu-item routerLink="/upgrade" *ngIf="(auth.user | async)?.isAnonymous">Upgrade</a>
+    <button mat-menu-item (click)="auth.signOut()">Log out</button>
+  </mat-menu>
+  <ng-template #logoutButton>
+    <a mat-raised-button color="primary" routerLink="/login">Log in</a>
+  </ng-template>
+</mat-toolbar>
+
+<notification-message></notification-message>
+<router-outlet></router-outlet>
