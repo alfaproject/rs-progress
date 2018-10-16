@@ -1,0 +1,12 @@
+.runescape {
+  display: table;
+
+  & > * {
+    display: table-cell;
+    padding-right: 8px;
+  }
+
+  > span {
+    vertical-align: middle;
+  }
+}

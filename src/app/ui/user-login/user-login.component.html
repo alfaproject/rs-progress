@@ -1,0 +1,52 @@
+<div class="content-container">
+  <h1>Login</h1>
+
+  <div *ngIf="!(auth.user | async); else alreadyLoggedIn">
+
+    <!-- <h3>Social Login</h3>
+
+      <button (click)="signInWithGoogle()" class="button btn-social btn-google">
+        <i class="fa fa-google fa-lg"></i> Connect Google
+      </button>
+
+      <button (click)="signInWithGithub()" class="button btn-social btn-github" disabled>
+        <i class="fa fa-github fa-lg"></i> Connect GitHub
+      </button>
+
+      <button (click)="signInWithFacebook()" class="button  btn-social btn-facebook" disabled>
+        <i class="fa fa-facebook fa-lg"></i> Connect Facebook
+      </button>
+
+      <button (click)="signInWithTwitter()" class="button  btn-social btn-twitter" disabled>
+        <i class="fa fa-twitter fa-lg"></i> Connect Twitter
+      </button>
+
+      <hr> -->
+
+      <h2>Anonymous account</h2>
+      <p>
+        Create an anonymous temporary account to try out the tracker.<br>
+        You will be able to convert to a proper account whenever you feel like.
+      </p>
+      <button mat-raised-button color="primary" (click)="signInAnonymously()">
+        Log in anonymously
+      </button>
+
+      <hr>
+
+      <h2>Existing account</h2>
+      <user-form mode="log-in"></user-form>
+
+      <hr>
+
+      <h2>New account</h2>
+      <user-form mode="sign-up"></user-form>
+  </div>
+</div>
+
+<ng-template #alreadyLoggedIn>
+  <p class="text-success">
+    You are logged in.<br>
+    <button mat-raised-button color="primary" (click)="logout()">Logout</button>
+  </p>
+</ng-template>

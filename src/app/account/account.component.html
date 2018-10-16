@@ -1,0 +1,16 @@
+<div class="content-container" *ngIf="user$ | async as user">
+  <h1>Account</h1>
+
+  <p class="runescape">
+    <mat-form-field appearance="standard">
+      <mat-label>RuneScape Name</mat-label>
+      <input matInput value="{{ user.rsn }}" #rsn>
+    </mat-form-field>
+    <span>
+      <button mat-flat-button color="primary" (click)="syncRsn(rsn.value)" [disabled]="loading$ | async">
+        Synchronise
+      </button>
+    </span>
+    <span *ngIf="loading$ | async"><mat-spinner diameter="36"></mat-spinner></span>
+  </p>
+</div>

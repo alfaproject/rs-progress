@@ -1,0 +1,40 @@
+.mat-drawer-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 64px;
+}
+
+.mat-drawer {
+  width: 220px;
+}
+
+.mat-expansion-panel {
+  .mat-nav-list {
+    padding-top: 0;
+  }
+
+  .mat-list-item {
+    height: 38px;
+    font-size: inherit;
+  }
+}
+
+.mat-expansion-panel-body {
+  padding-bottom: 0;
+}
+
+.nav-single {
+  .mat-list-item {
+    padding: 0 8px;
+  }
+}
+
+.hide {
+  display: none;
+}
+
+.mat-spinner {
+  margin: 16px auto;
+}

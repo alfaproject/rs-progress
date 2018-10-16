@@ -1,0 +1,16 @@
+@media (max-width: 599px) {
+  .mat-toolbar {
+    padding-left: 8px;
+  }
+}
+
+.logo {
+  display: block;
+  height: 48px;
+  padding: 8px 0;
+}
+
+.mat-raised-button {
+  padding: 0;
+  min-width: 60px;
+}

@@ -1,0 +1,27 @@
+<mat-sidenav-container>
+  <mat-sidenav
+    [mode]="(platform.isNarrowScreen$ | async) ? 'push' : 'side'"
+    [opened]="!(platform.isNarrowScreen$ | async)"
+  >
+    <mat-accordion>
+      <mat-nav-list class="nav-single">
+        <mat-list-item (click)="loadCategory(null)">All</mat-list-item>
+      </mat-nav-list>
+
+      <mat-spinner *ngIf="loadingCategories$ | async"></mat-spinner>
+      <mat-expansion-panel class="mat-elevation-z0" *ngFor="let category of categories$ | async">
+        <mat-expansion-panel-header expandedHeight="48px">
+          {{ category.name }}
+        </mat-expansion-panel-header>
+        <mat-nav-list *ngIf="category.categories$ | async as subCategories">
+          <mat-list-item *ngFor="let subCategory of subCategories" (click)="loadCategory(subCategory)">
+            {{ subCategory.name }}
+          </mat-list-item>
+        </mat-nav-list>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <achievement-grid [type]="type$ | async" [category]="selectedCategory"></achievement-grid>
+  </mat-sidenav-content>
+</mat-sidenav-container>

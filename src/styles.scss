@@ -1,0 +1,73 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,500');
+@import url('https://fonts.googleapis.com/css?family=Material+Icons');
+
+@import '~@angular/material/theming';
+
+$rs-typography: mat-typography-config(
+  $font-family: 'Raleway, Arial, sans-serif',
+);
+@include mat-core($rs-typography);
+
+$rs-primary-palette: (
+  50: #fbf7e7,
+  100: #f6ebc2,
+  200: #f0dd9a,
+  300: #eacf71,
+  400: #e6c552,
+  500: #e1bb34,
+  600: #ddb52f,
+  700: #d9ac27,
+  800: #d5a421,
+  900: #cd9615,
+  A100: #fffefd,
+  A200: #ffeeca,
+  A400: #ffdd97,
+  A700: #ffd57e,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #000000,
+    900: #000000,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  )
+);
+
+$rs-primary: mat-palette($rs-primary-palette);
+$rs-accent: mat-palette($rs-primary-palette);
+$rs-warn: mat-palette($mat-deep-orange);
+$rs-theme: mat-dark-theme($rs-primary, $rs-accent, $rs-warn);
+
+$color-primary: mat-color($rs-primary);
+$color-accent: mat-color($rs-accent);
+$color-warn: mat-color($rs-warn);
+
+@include angular-material-theme($rs-theme);
+
+body {
+  margin: 0;
+}
+
+.content-container {
+  box-sizing: border-box;
+  padding: 16px;
+}
+
+.flex-fill {
+  flex: 1;
+}
+
+a {
+  text-decoration: none;
+  color: $color-primary;
+}

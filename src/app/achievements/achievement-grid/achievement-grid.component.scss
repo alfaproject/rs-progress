@@ -1,0 +1,64 @@
+p {
+  margin: 0;
+}
+
+.mat-table,
+.mat-paginator {
+  background: none;
+}
+
+mat-header-row {
+  min-height: 48px;
+}
+
+.mat-column-completed {
+  flex: 0 0 20px;
+  overflow: visible;
+}
+
+.mat-column-runescore {
+  flex: 0 0 32px;
+  justify-content: center;
+}
+
+.mat-column-name {
+  align-items: flex-start;
+
+  div {
+    &:first-child {
+      flex: 1 1 auto;
+      padding: 6px 0;
+    }
+  }
+
+  img {
+    vertical-align: text-bottom;
+    margin-right: 4px;
+  }
+}
+
+.mat-cell,
+.mat-header-cell {
+  padding: 0 8px;
+
+  &:first-child {
+    padding-left: 16px;
+  }
+}
+
+.mat-header-cell {
+  align-items: center;
+}
+
+.content-container {
+  padding-bottom: 0;
+}
+
+.card-header {
+  display: flex;
+  padding: 16px 4px;
+}
+
+.mat-spinner {
+  margin: 16px auto;
+}
